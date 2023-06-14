@@ -5,7 +5,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import mongoose from 'mongoose'
-import router from './rotuer'
+import router from './router'
 
 
 const app = express()
@@ -25,11 +25,14 @@ server.listen(8080,()=>{
     console.log('Sever running on http://localhost:8080')
 
 })
-const MONGO_URL = "mongodb+srv://abeni:abeni@cluster0.h556vhf.mongodb.net/?retryWrites=true&w=majority"
+const MONGO_URL = "mongodb+srv://abenezermaru91:abeni@cluster0.h556vhf.mongodb.net/?retryWrites=true&w=majority"
 
 mongoose.Promise = Promise
 mongoose.connect(MONGO_URL)
 mongoose.connection.on('error',(error:Error)=>console.log(error))
+mongoose.connection.on('open',()=>{
+    console.log("Mongodb is connected")
+})
 
 
 app.use('/',router())
